@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -9,7 +11,7 @@ class MyCard extends StatelessWidget {
   Widget? child;
   Function()? onPressed;
 
-  MyCard({this.color, this.child, this.onPressed});
+  MyCard({Key? key, this.color, this.child, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,9 @@ class MyInnerCard extends StatelessWidget {
   final String label;
   final Color? color;
 
-  MyInnerCard({required this.icon, required this.label, this.color});
+  const MyInnerCard(
+      {Key? key, required this.icon, required this.label, this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +45,12 @@ class MyInnerCard extends StatelessWidget {
           size: 70.0,
           color: color,
         ),
-        SizedBox(
-          height: 10.0,
+        const SizedBox(
+          height: 16.0,
         ),
         Text(
           label,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20.0, color: color),
+          style: TextStyle(fontFamily: 'bold', fontSize: 20.0, color: color),
         )
       ],
     );
@@ -63,54 +66,48 @@ class BottomInnerCard extends StatelessWidget {
   Function()? onPressSub;
 
   BottomInnerCard(
-      {required this.title,
+      {Key? key,
+      required this.title,
       required this.value,
       this.subtitle,
       this.onPressAdd,
-      this.onPressSub});
+      this.onPressSub})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: textStyle,
-            ),
-            Text(
-              subtitle != null ? subtitle.toString() : '',
-              style: textStyle,
-            ),
-          ],
+        // Title Text
+        Text(
+          title,
+          style: const TextStyle(fontFamily: 'bold', fontSize: 18),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(
-              value.toString(),
-              style: numStyle,
-            ),
-          ],
+        Text(
+          subtitle != null ? subtitle.toString() : '',
+          style: textStyle,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             FloatingActionButton(
               onPressed: onPressSub,
-              child: Icon(
+              child: const Icon(
                 Icons.remove,
                 size: 40.0,
               ),
             ),
+
+            // Value Text
+            Text(
+              value.toString(),
+              style: numStyle,
+            ),
+
             FloatingActionButton(
               onPressed: onPressAdd,
-              child: Icon(
+              child: const Icon(
                 Icons.add,
                 size: 40.0,
               ),

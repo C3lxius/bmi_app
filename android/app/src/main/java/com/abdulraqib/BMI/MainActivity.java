@@ -1,4 +1,4 @@
-package com.appkitchen.bmi_app;
+package com.abdulraqib.BMI;
 
 import io.flutter.embedding.android.FlutterActivity;
 
